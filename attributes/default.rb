@@ -179,6 +179,8 @@ default["percona"]["server"]["replication"]["suppress_1592"] = false
 default["percona"]["server"]["replication"]["skip_slave_start"] = false
 default["percona"]["server"]["replication"]["replication_sql"] = "/etc/mysql/replication.sql"
 default["percona"]["server"]["replication"]["slave_transaction_retries"] = 10
+default["percona"]["server"]["replication"]["enforce_gtid_consistency"] = "OFF"
+default["percona"]["server"]["replication"]["gtid_mode"] = "OFF"
 
 # XtraBackup Settings
 default["percona"]["backup"]["configure"] = false
