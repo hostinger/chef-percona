@@ -292,6 +292,12 @@ replicate-ignore-db = <%= ignore_db %>
 <% end -%>
 <% end -%>
 
+<% unless node["percona"]["server"]["replication"]["replicate_do_db"].empty? %>
+<% Array(node["percona"]["server"]["replication"]["replicate_do_db"]).each do |db| -%>
+replicate-do-db = <%= db %>
+<% end -%>
+<% end -%>
+
 <% unless node["percona"]["server"]["replication"]["ignore_table"].empty? %>
 # Creates a replication filter by telling the slave SQL thread not to replicate any statement that updates the specified table, even if any other tables might be updated by the same statement.
 <% node["percona"]["server"]["replication"]["ignore_table"].each do |ignore_table| -%>
@@ -323,6 +329,8 @@ read_only
 <% if node["percona"]["server"]["replication"]["skip_slave_start"] %>
 skip-slave-start
 <% end %>
+
+slave_exec_mode = <%= node["percona"]["server"]["replication"]["slave_exec_mode"] %>
 
 # Number of times the slave SQL thread will retry a transaction in case it
 # failed with a deadlock or elapsed lock wait timeout, before giving up and
