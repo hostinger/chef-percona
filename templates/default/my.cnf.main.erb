@@ -137,6 +137,10 @@ query_alloc_block_size = <%= node["percona"]["server"]["query_alloc_block_size"]
 memlock
 <% end %>
 
+<% if node["percona"]["server"]["max_statement_time"] %>
+max_statement_time = <%= node["percona"]["server"]["max_statement_time"] %>
+<% end %>
+
 # Set the default transaction isolation level. Levels available are:
 # READ-UNCOMMITTED, READ-COMMITTED, REPEATABLE-READ, SERIALIZABLE
 
