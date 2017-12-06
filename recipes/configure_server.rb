@@ -108,9 +108,9 @@ end
 
 # install db to the data directory
 execute "setup mysql datadir" do
-  command "#{node["percona"]["version"] == "5.7" ? "mysqld --initialize" : "mysql_install_db"} --defaults-file=#{percona["main_config_file"]} --user=#{user}" # rubocop:disable LineLength
+  command "mysql_install_db --defaults-file=#{percona["main_config_file"]} --user=#{user}" # rubocop:disable LineLength
   not_if "test -f #{datadir}/mysql/user.frm"
-  not_if "test -f #{datadir}/mysql/ibdata1"
+  not_if { percona["version"] == "5.7" }
   action :nothing
 end
 
