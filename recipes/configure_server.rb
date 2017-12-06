@@ -106,11 +106,19 @@ service "mysql" do
   action server["enable"] ? :enable : :disable
 end
 
+initialize_mysqld = "mysql_install_db --defaults-file=#{percona["main_config_file"]} --user=#{user}"
+initialize_mysqld = "mysqld --defaults-file=#{percona["main_config_file"]} --initialize-insecure --user=#{user}" if percona["version"] == "5.7" # rubocop:disable LineLength
 # install db to the data directory
 execute "setup mysql datadir" do
-  command "mysql_install_db --defaults-file=#{percona["main_config_file"]} --user=#{user}" # rubocop:disable LineLength
+  command initialize_mysqld
   not_if "test -f #{datadir}/mysql/user.frm"
-  not_if { percona["version"] == "5.7" }
+  action :nothing
+end
+
+execute "setup mysql datadir" do
+  command "mysqld --defaults-file=#{percona["main_config_file"]} --initialize-insecure --user=#{user}" # rubocop:disable LineLength
+  not_if "test -f #{datadir}/mysql/user.frm"
+  only_if { percona["version"] == "5.7" }
   action :nothing
 end
 
