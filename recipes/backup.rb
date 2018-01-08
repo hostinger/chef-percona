@@ -13,7 +13,8 @@ when "debian"
     options "--force-yes"
   end
 when "rhel"
-  package "percona-xtrabackup"
+  package "percona-xtrabackup" unless node['percona']['version'] == '5.7'
+  package "percona-xtrabackup-24" if node['percona']['version'] == '5.7'
 end
 
 # access grants
