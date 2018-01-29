@@ -138,7 +138,11 @@ memlock
 <% end %>
 
 <% if node["percona"]["server"]["max_statement_time"] %>
+<% if node["percona"]["version"] == "5.7" %>
+max_execution_time = <%= node["percona"]["server"]["max_statement_time"] %>
+<% else %>
 max_statement_time = <%= node["percona"]["server"]["max_statement_time"] %>
+<% end %>
 <% end %>
 
 # Set the default transaction isolation level. Levels available are:
