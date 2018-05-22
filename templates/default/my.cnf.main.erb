@@ -453,7 +453,9 @@ skip-innodb
 # start to allocate it from the OS.  As this is fast enough on most
 # recent operating systems, you normally do not need to change this
 # value. SHOW INNODB STATUS will display the current amount used.
+<% unless node["percona"]["version"] == "5.7" %>
 innodb_additional_mem_pool_size = <%= node["percona"]["server"]["innodb_additional_mem_pool_size"] %>
+<% end %>
 
 # This config file assumes a main memory of at least 8G
 innodb_buffer_pool_size = <%= node["percona"]["server"]["innodb_buffer_pool_size"] %>
