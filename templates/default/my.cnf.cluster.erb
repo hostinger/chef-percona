@@ -43,6 +43,7 @@ malloc-lib       = <%= node["percona"]["server"]["jemalloc_lib"] %>
 #
 # * Basic Settings
 #
+server-id         = <%= node["percona"]["server"]["server_id"] %>
 user              = <%= node["percona"]["server"]["username"] %>
 pid-file          = <%= node["percona"]["server"]["pidfile"] %>
 socket            = <%= node["percona"]["server"]["socket"] %>
