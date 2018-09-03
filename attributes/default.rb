@@ -6,8 +6,8 @@
 # include the openssl cookbook password library
 if defined?(::Opscode::OpenSSL::Password)
   ::Chef::Node.send(:include, ::Opscode::OpenSSL::Password)
-elsif defined?(::OpenSSLCookbook::Password)
-  ::Chef::Node.send(:include, ::OpenSSLCookbook::Password)
+elsif defined?(::OpenSSLCookbook::RandomPassword)
+  ::Chef::Node.send(:include, ::OpenSSLCookbook::RandomPassword)
 elsif defined?(::Chef::OpenSSL::Password)
   ::Chef::Node.send(:include, ::Chef::OpenSSL::Password)
 end
