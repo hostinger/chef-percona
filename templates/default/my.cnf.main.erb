@@ -640,7 +640,7 @@ key_buffer_size = <%= node["percona"]["server"]["key_buffer_size"] %>
 
     <%= "[#{category}]" %>
     <% node["percona"]["conf"][category].keys.each do |key| %>
-        <% if node["percona"]["conf"][category][key].empty? %>
+        <% if node["percona"]["conf"][category][key].is_a?(String) && node["percona"]["conf"][category][key].empty? %>
             <%= key %>
         <% else %>
             <%= "#{key} = #{node["percona"]["conf"][category][key]}" %>
