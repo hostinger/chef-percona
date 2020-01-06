@@ -2,4 +2,5 @@
 [<%= record %>]
 user=root
 password='<%= @root_password %>'
+socket=<%= node['percona']['server']['socket'] %>
 <% end -%>
