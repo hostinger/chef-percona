@@ -126,6 +126,7 @@ default["percona"]["server"]["binlog_do_db"] = []
 default["percona"]["server"]["binlog_ignore_db"] = []
 default["percona"]["server"]["expire_logs_days"] = 10
 default["percona"]["server"]["max_binlog_size"] = "100M"
+default["percona"]["server"]["binlog_space_limit"] = 0
 default["percona"]["server"]["binlog_cache_size"] = "1M"
 default["percona"]["server"]["binlog_format"] = "MIXED"
 default["percona"]["server"]["log_bin"] = "master-bin"
