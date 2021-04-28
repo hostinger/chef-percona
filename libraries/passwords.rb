@@ -29,6 +29,10 @@ class Chef
       end
       # password will be nil if no encrypted data bag was loaded
       # fall back to the attribute on this node
+      unless password
+        Chef::Log.warn("The password for MySQL user '#{user}' is nil.")
+      end
+
       password || default
     end
 
