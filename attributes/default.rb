@@ -88,7 +88,6 @@ default["percona"]["server"]["federated"] = false
 %w[debian_password root_password].each do |attribute|
   next if attribute?(node["percona"]["server"][attribute])
 
-  Chef::Log.warn("Attribute '#{attribute}' does not exist, setting random password.")
   default["percona"]["server"][attribute] = random_password
 end
 

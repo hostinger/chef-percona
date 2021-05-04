@@ -23,16 +23,14 @@ class Chef
         pwds = Chef::EncryptedDataBagItem.load(@bag, item, secret) unless vault
         # now, let's look for the user password
         password = pwds[user]
+      rescue Chef::Exceptions::ValidationFailed => e
+        raise "Validation failed loading data bag '#{@bag}/#{item}'."
       rescue
         Chef::Log.info("Unable to load password for #{user}, #{item},"\
                        "fall back to non-encrypted password")
       end
       # password will be nil if no encrypted data bag was loaded
       # fall back to the attribute on this node
-      unless password
-        Chef::Log.warn("The password for MySQL user '#{user}' is nil.")
-      end
-
       password || default
     end
 
