@@ -29,9 +29,13 @@ class Chef
         Chef::Log.info("Unable to load password for #{user}, #{item},"\
                        "fall back to non-encrypted password")
       end
-      # password will be nil if no encrypted data bag was loaded
-      # fall back to the attribute on this node
-      password || default
+      # Avoid generating random password if _somehow_ data bag fails to load.
+      unless password
+        Chef::Log.info("Dumping passwords from '#{@bag}/#{item}': #{pwds}")
+        raise "Failed setting password for '#{user}'."
+      end
+
+      password
     end
 
     # mysql root
