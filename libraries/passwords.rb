@@ -25,6 +25,8 @@ class Chef
         password = pwds[user]
       rescue Chef::Exceptions::ValidationFailed => e
         raise "Validation failed loading data bag '#{@bag}/#{item}'."
+      rescue Net::HTTPServerException => e
+        raise "Validation failed loading data bag '#{@bag}/#{item}'."
       rescue
         Chef::Log.info("Unable to load password for #{user}, #{item},"\
                        "fall back to non-encrypted password")
@@ -34,7 +36,7 @@ class Chef
         Chef::Log.info("Dumping passwords from '#{@bag}/#{item}': #{pwds}")
       end
 
-      password
+      password || default
     end
 
     # mysql root
