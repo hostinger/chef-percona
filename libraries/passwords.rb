@@ -32,7 +32,6 @@ class Chef
       # Avoid generating random password if _somehow_ data bag fails to load.
       unless password
         Chef::Log.info("Dumping passwords from '#{@bag}/#{item}': #{pwds}")
-        raise "Failed setting password for '#{user}'."
       end
 
       password
